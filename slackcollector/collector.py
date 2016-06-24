@@ -19,7 +19,6 @@ import sys
 import slack
 import slack.users
 
-
 class Collector:
 
     def load_config(self, config_file_path):
@@ -27,14 +26,17 @@ class Collector:
         Parses the yaml configuration file and stores the data into
         member variables
         """
-        if not os.path.isfile(config_file_path):
+        # Load configuration file
+        config_file = os.path.join(os.path.dirname(__file__), '../config/' + config_file_path)
+
+        if not os.path.isfile(config_file):
             self.print_out('Configuration file does not exist. Make sure the '
-                           'file "config.yml" exists and is configured '
+                           'file "config/config.yml" exists and is configured '
                            'correctly.', 'FATAL')
             return False
 
         # Load the file
-        config = yaml.safe_load(open(config_file_path))
+        config = yaml.safe_load(open(config_file))
 
         if not config:
             self.print_out('Corrupted configuration file - could not be '
@@ -87,6 +89,7 @@ class Collector:
         self.print_out(
             'Attempting to write data to output file: {}'.format(output_file))
         # Create the directory if it doesn't exist already
+
         self.make_dir(self.data_dir)
         # Write data to file
         with io.open(output_file, 'w', encoding='utf-8') as f:
@@ -148,6 +151,7 @@ if __name__ == "__main__":
     # Create a new Collector instance
     # and pass the configuration as a param
     collector_inst = Collector()
+
     # Try to load the configuration file
     if collector_inst.load_config('config.yml'):
         # Initiate the collection process

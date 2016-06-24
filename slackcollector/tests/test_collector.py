@@ -17,7 +17,7 @@ class TestCollector(unittest.TestCase):
 
     def setUp(self):
         # Get the configuration file from /src/
-        self.config_file_path = 'samples/config.example.yml'
+        self.config_file = 'config.example.yml'
 
         # Load it
         self.collector_inst = Collector()
@@ -27,7 +27,7 @@ class TestCollector(unittest.TestCase):
         True when the configuration file is loaded properly
         and values are stored as member variables
         """
-        outcome = self.collector_inst.load_config(self.config_file_path)
+        outcome = self.collector_inst.load_config(self.config_file)
         self.assertTrue(outcome)
         self.assertTrue(self.collector_inst.data_dir)
         self.assertTrue(self.collector_inst.data_file_prefix)

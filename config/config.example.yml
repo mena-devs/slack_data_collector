@@ -1,7 +1,9 @@
 # Collector Configuration
+# Replace with your own values
+
 storage:
-    data_dir: /tmp/data
-    data_file_prefix: MDEVS-data
+    data_dir: <output_directory>
+    data_file_prefix: <MDEVS-data>
 
 secure:
     # Replace <token> with the Slack API token
