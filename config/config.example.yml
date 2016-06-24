@@ -2,7 +2,11 @@
 # Replace with your own values
 
 storage:
+    # Replace output directory with the location where you want
+    # the output json file to be stored
     data_dir: <output_directory>
+    # Replace <MDEVS-data> with the prefix of choice 
+    # and don't forget to remove the <>
     data_file_prefix: <MDEVS-data>
 
 secure:

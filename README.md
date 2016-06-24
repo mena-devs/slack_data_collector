@@ -1,43 +1,139 @@
 # Slack Data Collector
 
+### Synopsis
+
 Uses the Slack API to collect anonymized information about the community
 
-## Installation instructions
+### Installation & Configuration
 
-### OSX
+#### Minimum Requirements
 
-#### Step 1
+  ```
+  - Python 2.7 or 3.5
+  - pip or pip3
 
-Make sure you have `Python` installed
+  # For testing
+  - tox
+  - nose
+  ```
 
-`brew install python3`
+1. Clone the repository into any directory you have access to:
 
-#### Step 2
+    ```sh
+    git clone https://github.com/mena-devs/slack_data_collector
+    ```
 
-Install needed packages
+2. Copy the example configuration file, rename it `config.yml` and modify it to your liking:
 
-`pip3 install nose`
+    ```sh
+    cp config/config.example.yml config/config.yml
+    ```
 
-`pip3 install tox`
+3. Install the package:
 
-#### Step 3
+    ```sh
+    python setup.py develop
+    ```
 
-Move example configuration file, rename it and add Slack authentication token.
+4. Run the tests (skip this step if you haven't installed nose)
 
-`mv samples/config.example.yml slackcollector/config.yml`
+    ```sh
+    nosetests
+    ```
 
-#### Step 4
+5. Run the script
 
-`python setup.py develop`
+    ```sh
+    python slackcollector/collector.py
+    ```
 
-#### Step 5
+### Unit Testing
 
-Run the tests
+To run the unit tests, you need to install `nose` and `tox` packages
 
-`nosetests`
+    ```sh
+    pip install nose
+    pip install tox
+    ```
 
-#### Step 6
+Run the tests:
 
-Run the script
+    ```sh
+    # Run unit tests only
+    nosetests
 
-`python slackcollector/collector.py`
+    # Test against python 2.7 and 3.5 and run the linters
+    tox
+    ```
+
+### Sample Output
+
+    ```json
+    {
+        "cache_ts": 1466800744,
+        "members": [
+            {
+                "presence": "away",
+                "deleted": true,
+                "id": "U04B7LSFG",
+                "is_bot": true,
+                "team_id": "T03B400RJ"
+            },
+            {
+                "presence": "away",
+                "is_ultra_restricted": false,
+                "deleted": false,
+                "is_owner": false,
+                "tz_label": null,
+                "is_admin": false,
+                "is_restricted": false,
+                "is_primary_owner": false,
+                "id": "U0AE305C4",
+                "tz": "EET",
+                "color": "50a0cf",
+                "tz_offset": 10800,
+                "has_2fa": false,
+                "team_id": "T03B400RJ",
+                "is_bot": false,
+                "status": null
+            },
+            {
+                "presence": "away",
+                "is_ultra_restricted": false,
+                "deleted": false,
+                "is_owner": false,
+                "tz_label": null,
+                "is_admin": false,
+                "is_restricted": false,
+                "is_primary_owner": false,
+                "id": "U03B5176N",
+                "tz": "EET",
+                "color": "e7392d",
+                "tz_offset": 10800,
+                "has_2fa": false,
+                "team_id": "T03B400RJ",
+                "is_bot": false,
+                "status": null
+            },
+            {
+                "presence": "away",
+                "is_ultra_restricted": false,
+                "deleted": false,
+                "is_owner": false,
+                "tz_label": null,
+                "is_admin": false,
+                "is_restricted": false,
+                "is_primary_owner": false,
+                "id": "U03CWMQSH",
+                "tz": "EET",
+                "color": "db3150",
+                "tz_offset": 10800,
+                "has_2fa": false,
+                "team_id": "T03B400RJ",
+                "is_bot": false,
+                "status": null
+            }
+            ...
+        ],
+        "ok": true
+    }
