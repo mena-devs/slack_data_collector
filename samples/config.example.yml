@@ -1,6 +1,6 @@
 # Collector Configuration
 storage:
-    data_dir: /tmp/data
+    data_dir: output
     data_file_prefix: MDEVS-data
 
 secure:

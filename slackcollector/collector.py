@@ -87,6 +87,7 @@ class Collector:
         self.print_out(
             'Attempting to write data to output file: {}'.format(output_file))
         # Create the directory if it doesn't exist already
+
         self.make_dir(self.data_dir)
         # Write data to file
         with io.open(output_file, 'w', encoding='utf-8') as f:
@@ -148,8 +149,12 @@ if __name__ == "__main__":
     # Create a new Collector instance
     # and pass the configuration as a param
     collector_inst = Collector()
+
+    dir = os.path.dirname(__file__)
+    config_file = os.path.join(dir, 'config.yml')
+
     # Try to load the configuration file
-    if collector_inst.load_config('config.yml'):
+    if collector_inst.load_config(config_file):
         # Initiate the collection process
         data = collector_inst.collect_data()
         # Write data into the file
