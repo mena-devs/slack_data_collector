@@ -149,7 +149,7 @@ if __name__ == "__main__":
     # and pass the configuration as a param
     collector_inst = Collector()
     # Try to load the configuration file
-    if collector_inst.load_config('samples/config.example.yml'):
+    if collector_inst.load_config('config.yml'):
         # Initiate the collection process
         data = collector_inst.collect_data()
         # Write data into the file
