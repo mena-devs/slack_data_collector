@@ -1,0 +1,60 @@
+{
+    "cache_ts": 1466692867,
+    "members": [
+        {
+            "deleted": true,
+            "id": "ABBBBBBB",
+            "team_id": "TTTTTTTT",
+            "is_bot": true,
+            "profile": {
+                "real_name_normalized": "",
+                "bot_id": "B04B7LSF8",
+                "image_24": "http://google.com",
+                "image_32": "http://google.com",
+                "image_72": "http://google.com",
+                "image_48": "http://google.com",
+                "avatar_hash": "0f78d5b118df",
+                "image_original": "http://google.com",
+                "image_192": "http://google.com/",
+                "real_name": "sensitive info"
+            },
+            "name": "1qad"
+        },
+        {
+            "is_ultra_restricted": false,
+            "is_bot": false,
+            "has_2fa": false,
+            "team_id": "T03B400RJ",
+            "color": "50a0cf",
+            "tz_label": null,
+            "real_name": "sensitive info",
+            "deleted": false,
+            "is_primary_owner": false,
+            "tz_offset": 10800,
+            "tz": "EET",
+            "id": "sensitive info",
+            "name": "aa",
+            "is_owner": false,
+            "profile": {
+                "image_24": "sensitive info",
+                "image_32": "sensitive info",
+                "image_512": "sensitive info",
+                "image_72": "sensitive info",
+                "avatar_hash": "sensitive info",
+                "first_name": "sensitive info",
+                "image_192": "sensitive info",
+                "real_name": "sensitive info",
+                "last_name": "sensitive info",
+                "real_name_normalized": "sensitive info",
+                "email": "sensitive info",
+                "image_1024": "sensitive info",
+                "image_48": "sensitive info",
+                "image_original": "sensitive info"
+            },
+            "status": null,
+            "is_admin": false,
+            "is_restricted": false
+        }
+    ],
+    "ok": true
+}
