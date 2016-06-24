@@ -19,25 +19,27 @@ import sys
 import slack
 import slack.users
 
+
 class Collector:
 
     def load_config(self, config_file_path):
+        """
+        Parses the yaml configuration file and stores the data into
+        member variables
+        """
         if not os.path.isfile(config_file_path):
-            self.print_out('Configuration file does not exist. Make sure the file '
-                           '"config.yml" exists and is configured correctly.',
-                           'FATAL')
+            self.print_out('Configuration file does not exist. Make sure the '
+                           'file "config.yml" exists and is configured '
+                           'correctly.', 'FATAL')
             return False
+
         # Load the file
         config = yaml.safe_load(open(config_file_path))
 
-        """ 
-        Parses the yaml configuration file and stores the data into
-        member variables 
-        """
         if not config:
-            self.print_out('Corrupted configuration file - could not be parsed '
-                           'make sure "config.yml" is configured correctly.',
-                           'FATAL')
+            self.print_out('Corrupted configuration file - could not be '
+                           'parsed make sure "config.yml" is configured '
+                           'correctly.', 'FATAL')
             return False
 
         self.data_dir = config['storage']['data_dir']
@@ -61,7 +63,8 @@ class Collector:
             # Exit if an exception was raised
             e = sys.exc_info()[0]
             self.print_out(
-                'Failed to retrieve information from Slack: {}'.format(e), 'FATAL')
+                'Failed to retrieve information from Slack: {}'.format(e),
+                'FATAL')
             return False
         # Return the users list
         return self.user_list
@@ -95,7 +98,9 @@ class Collector:
             except:
                 e = sys.exc_info()[0]
                 self.print_out(
-                    'Failed to write data into: {}'.format(output_file), 'FATAL')
+                    'Failed to write data into: {}\n'
+                    'Error: {}'.format(output_file, e),
+                    'FATAL')
                 return False
 
             self.print_out('Job complete.')
