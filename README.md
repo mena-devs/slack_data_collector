@@ -2,9 +2,10 @@
 
     `version: alpha-0.0.1`
 
-master
-    
-[![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=master)](https://travis-ci.org/mena-devs/slack_data_collector)
+| Branch | Build Status |
+| ------ | --- |
+| master | [![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=master)](https://travis-ci.org/mena-devs/slack_data_collector) |
+| alpha-0.0.2 | [![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=alpha-0.0.2)](https://travis-ci.org/mena-devs/slack_data_collector) |
 
 ### Synopsis
 
