@@ -140,13 +140,11 @@ class Collector:
 
 
 if __name__ == "__main__":
-    script_dir = os.path.dirname(__file__)
-    config_file_path = os.path.join(script_dir, 'config.yml')
     # Create a new Collector instance
     # and pass the configuration as a param
     collector_inst = Collector()
     # Try to load the configuration file
-    if collector_inst.load_config(config_file_path):
+    if collector_inst.load_config('samples/config.example.yml'):
         # Initiate the collection process
         data = collector_inst.collect_data()
         # Write data into the file
