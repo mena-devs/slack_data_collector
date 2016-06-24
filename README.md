@@ -1,5 +1,11 @@
 # Slack Data Collector
 
+    `version: alpha-0.0.1`
+
+    master
+    
+    [![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=master)](https://travis-ci.org/mena-devs/slack_data_collector)
+
 ### Synopsis
 
 Uses the Slack API to collect anonymized information about the community
