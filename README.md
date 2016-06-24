@@ -49,91 +49,92 @@ Uses the Slack API to collect anonymized information about the community
 
 ### Unit Testing
 
-To run the unit tests, you need to install `nose` and `tox` packages
+To run the unit tests, you need to install `nose` and `tox` packages:
 
-    ```sh
-    pip install nose
-    pip install tox
-    ```
+```sh
+pip install nose
+pip install tox
+```
 
 Run the tests:
 
-    ```sh
-    # Run unit tests only
-    nosetests
+```sh
+# Run unit tests only
+nosetests
 
-    # Test against python 2.7 and 3.5 and run the linters
-    tox
-    ```
+# Test against python 2.7 and 3.5 and run the linters
+tox
+```
 
 ### Sample Output
 
-    ```json
-    {
-        "cache_ts": 1466800744,
-        "members": [
-            {
-                "presence": "away",
-                "deleted": true,
-                "id": "U04B7LSFG",
-                "is_bot": true,
-                "team_id": "T03B400RJ"
-            },
-            {
-                "presence": "away",
-                "is_ultra_restricted": false,
-                "deleted": false,
-                "is_owner": false,
-                "tz_label": null,
-                "is_admin": false,
-                "is_restricted": false,
-                "is_primary_owner": false,
-                "id": "U0AE305C4",
-                "tz": "EET",
-                "color": "50a0cf",
-                "tz_offset": 10800,
-                "has_2fa": false,
-                "team_id": "T03B400RJ",
-                "is_bot": false,
-                "status": null
-            },
-            {
-                "presence": "away",
-                "is_ultra_restricted": false,
-                "deleted": false,
-                "is_owner": false,
-                "tz_label": null,
-                "is_admin": false,
-                "is_restricted": false,
-                "is_primary_owner": false,
-                "id": "U03B5176N",
-                "tz": "EET",
-                "color": "e7392d",
-                "tz_offset": 10800,
-                "has_2fa": false,
-                "team_id": "T03B400RJ",
-                "is_bot": false,
-                "status": null
-            },
-            {
-                "presence": "away",
-                "is_ultra_restricted": false,
-                "deleted": false,
-                "is_owner": false,
-                "tz_label": null,
-                "is_admin": false,
-                "is_restricted": false,
-                "is_primary_owner": false,
-                "id": "U03CWMQSH",
-                "tz": "EET",
-                "color": "db3150",
-                "tz_offset": 10800,
-                "has_2fa": false,
-                "team_id": "T03B400RJ",
-                "is_bot": false,
-                "status": null
-            }
-            ...
-        ],
-        "ok": true
-    }
+```json
+{
+    "cache_ts": 1466800744,
+    "members": [
+        {
+            "presence": "away",
+            "deleted": true,
+            "id": "U04B7LSFG",
+            "is_bot": true,
+            "team_id": "T03B400RJ"
+        },
+        {
+            "presence": "away",
+            "is_ultra_restricted": false,
+            "deleted": false,
+            "is_owner": false,
+            "tz_label": null,
+            "is_admin": false,
+            "is_restricted": false,
+            "is_primary_owner": false,
+            "id": "U0AE305C4",
+            "tz": "EET",
+            "color": "50a0cf",
+            "tz_offset": 10800,
+            "has_2fa": false,
+            "team_id": "T03B400RJ",
+            "is_bot": false,
+            "status": null
+        },
+        {
+            "presence": "away",
+            "is_ultra_restricted": false,
+            "deleted": false,
+            "is_owner": false,
+            "tz_label": null,
+            "is_admin": false,
+            "is_restricted": false,
+            "is_primary_owner": false,
+            "id": "U03B5176N",
+            "tz": "EET",
+            "color": "e7392d",
+            "tz_offset": 10800,
+            "has_2fa": false,
+            "team_id": "T03B400RJ",
+            "is_bot": false,
+            "status": null
+        },
+        {
+            "presence": "away",
+            "is_ultra_restricted": false,
+            "deleted": false,
+            "is_owner": false,
+            "tz_label": null,
+            "is_admin": false,
+            "is_restricted": false,
+            "is_primary_owner": false,
+            "id": "U03CWMQSH",
+            "tz": "EET",
+            "color": "db3150",
+            "tz_offset": 10800,
+            "has_2fa": false,
+            "team_id": "T03B400RJ",
+            "is_bot": false,
+            "status": null
+        }
+        ...
+    ],
+    "ok": true
+}
+```
