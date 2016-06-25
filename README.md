@@ -20,7 +20,6 @@ Uses the Slack API to collect anonymized information about the community
   - pip or pip3
 
   # For testing
-  - tox
   - nose
   ```
 
@@ -39,13 +38,13 @@ Uses the Slack API to collect anonymized information about the community
 3. Install the package:
 
     ```sh
-    python setup.py develop
+    python setup.py install
     ```
 
-4. Run the tests (skip this step if you haven't installed nose)
+4. Run the tests
 
     ```sh
-    nosetests
+    tox
     ```
 
 5. Run the script
@@ -56,21 +55,17 @@ Uses the Slack API to collect anonymized information about the community
 
 ### Unit Testing
 
-To run the unit tests, you need to install `nose` and `tox` packages:
+`slack_data_collector` uses `tox` to run unit tests inside virtualenvs. If you want to run them you simply need to install `tox` and run it:
 
-```sh
-pip install nose
+``` sh
 pip install tox
-```
-
-Run the tests:
-
-```sh
-# Run unit tests only
-nosetests
-
-# Test against python 2.7 and 3.5 and run the linters
 tox
+```
+By default this script tests against python 2.7 and python 3.5. If you want to test versus a specific version, you can always specify it on the CLI:
+
+``` sh
+# to test against python 3.3
+tox -e py33
 ```
 
 ### Sample Output
