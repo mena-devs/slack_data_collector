@@ -19,6 +19,7 @@ import sys
 import slack
 import slack.users
 
+
 class Collector:
 
     def load_config(self, config_file_path):
@@ -27,7 +28,8 @@ class Collector:
         member variables
         """
         # Load configuration file
-        config_file = os.path.join(os.path.dirname(__file__), '../config/' + config_file_path)
+        config_file = os.path.join(os.path.dirname(__file__),
+                                   '../config/' + config_file_path)
 
         if not os.path.isfile(config_file):
             self.print_out('Configuration file does not exist. Make sure the '
@@ -58,16 +60,9 @@ class Collector:
         """
         self.print_out('Information Retrieval Began ...')
         # Attempt to retrieve the user list
-        try:
-            self.user_list = slack.users.list()
-            self.print_out('Data Retrieved')
-        except:
-            # Exit if an exception was raised
-            e = sys.exc_info()[0]
-            self.print_out(
-                'Failed to retrieve information from Slack: {}'.format(e),
-                'FATAL')
-            return False
+
+        self.user_list = slack.users.list()
+        self.print_out('Data Retrieved')
         # Return the users list
         return self.user_list
 
@@ -98,7 +93,7 @@ class Collector:
                                    ensure_ascii=False,
                                    indent=4,
                                    separators=(',', ': ')))
-            except:
+            except IOError:
                 e = sys.exc_info()[0]
                 self.print_out(
                     'Failed to write data into: {}\n'
