@@ -1,15 +1,9 @@
 language: python
-
-python:
-  - "2.7"
-  - "3.5"
-
-install: 
-  - pip install nose
-  - python setup.py install
-
-before_script:
-  - cp config/config.example.yml config/config.yml
-
-script: 
-  - nosetests
+install:
+  - pip install tox
+script:
+  - tox
+env:
+  - TOXENV=linters
+  - TOXENV=py27
+  - TOXENV=py34
