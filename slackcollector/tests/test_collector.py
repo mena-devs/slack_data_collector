@@ -23,21 +23,16 @@ class TestCollector(unittest.TestCase):
         self.collector_inst = Collector()
 
     def test_load_config_file_success(self):
-        """
-        True when the configuration file is loaded properly
-        and values are stored as member variables
-        """
-        outcome = self.collector_inst.load_config(self.config_file)
-        self.assertTrue(outcome)
-        self.assertTrue(self.collector_inst.data_dir)
-        self.assertTrue(self.collector_inst.data_file_prefix)
+        self.collector_inst.load_config(self.config_file)
+        self.assertIsNotNone(self.collector_inst.data_dir)
+        self.assertIsNotNone(self.collector_inst.data_file_prefix)
 
     def test_load_config_file_failure(self):
         """
         Test a non existent configuration file
         """
-        outcome = self.collector_inst.load_config('/boguspath')
-        self.assertFalse(outcome)
+        self.assertRaises(IOError, self.collector_inst.load_config,
+                          '/boguspath')
 
     def test_anonymize_data_success(self):
         """
@@ -47,13 +42,10 @@ class TestCollector(unittest.TestCase):
         test_json_file = os.path.join(os.path.dirname(__file__),
                                       '_test_data/sensitive_json.json')
 
-        # Load the file
         with open(test_json_file) as data_file:
             json_data = json.load(data_file)
-        # Anonymize it
         clean_json_data = self.collector_inst.anonymize_data(json_data)
         sensitive_keys_set = set(['profile', 'real_name', 'name'])
-        # Check for occurences
         for item in clean_json_data['members']:
             # If the intersection of the "sensitive_keys_set" and keys sets is
             # empty the we have cleared these keys and their values

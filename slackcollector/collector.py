@@ -30,28 +30,10 @@ class Collector:
         # Load configuration file
         config_file = os.path.join(os.path.dirname(__file__),
                                    '../config/' + config_file_path)
-
-        if not os.path.isfile(config_file):
-            self.print_out('Configuration file does not exist. Make sure the '
-                           'file "config/config.yml" exists and is configured '
-                           'correctly.', 'FATAL')
-            return False
-
-        # Load the file
         config = yaml.safe_load(open(config_file))
-
-        if not config:
-            self.print_out('Corrupted configuration file - could not be '
-                           'parsed make sure "config.yml" is configured '
-                           'correctly.', 'FATAL')
-            return False
-
         self.data_dir = config['storage']['data_dir']
         self.data_file_prefix = config['storage']['data_file_prefix']
-        # Set the slack API token
         slack.api_token = config['secure']['slack_group_token']
-        # All went well
-        return True
 
     def collect_data(self):
         """
@@ -88,35 +70,19 @@ class Collector:
         self.make_dir(self.data_dir)
         # Write data to file
         with io.open(output_file, 'w', encoding='utf-8') as f:
-            try:
-                f.write(json.dumps(self.user_list,
-                                   ensure_ascii=False,
-                                   indent=4,
-                                   separators=(',', ': ')))
-            except IOError:
-                e = sys.exc_info()[0]
-                self.print_out(
-                    'Failed to write data into: {}\n'
-                    'Error: {}'.format(output_file, e),
-                    'FATAL')
-                return False
-
+            f.write(json.dumps(self.user_list,
+                               ensure_ascii=False,
+                               indent=4,
+                               separators=(',', ': ')))
             self.print_out('Job complete.')
-            return True
 
     def anonymize_data(self, data):
         """
         Remove all personal and private data
         """
-        if not data:
-            return False
-
         for item in data['members']:
-            # Remove user profile
             item.pop('profile', None)
-            # Remove real name
             item.pop('real_name', None)
-            # Remove name
             item.pop('name', None)
 
         return data
@@ -143,15 +109,27 @@ class Collector:
 
 
 if __name__ == "__main__":
-    # Create a new Collector instance
-    # and pass the configuration as a param
     collector_inst = Collector()
-
-    # Try to load the configuration file
-    if collector_inst.load_config('config.yml'):
-        # Initiate the collection process
-        data = collector_inst.collect_data()
-        # Write data into the file
-        data = collector_inst.anonymize_data(data)
-        # Write clean data into file
+    try:
+        collector_inst.load_config('config.yml')
+    except IOError:
+        collector_inst.print_out('Configuration file does not exist. Make sure'
+                                 ' the file "config/config.yml" exists and is '
+                                 'configured correctly.', 'FATAL')
+        sys.exit(1)
+    except yaml.scanner.ScannerError:
+        collector_inst.print_out('Corrupted configuration file - could not be '
+                                 'parsed make sure "config.yml" is configured '
+                                 'correctly.', 'FATAL')
+        sys.exit(2)
+    data = collector_inst.collect_data()
+    data = collector_inst.anonymize_data(data)
+    try:
         collector_inst.write_data(data)
+    except IOError as e:
+        e = sys.exc_info()[0]
+        collector_inst.print_out(
+            'Failed to write data.\n'
+            'Error: {}'.format(e),
+            'FATAL')
+        sys.exit(3)
