@@ -22,6 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""The main Collector module."""
+
 import yaml
 import os
 import io
@@ -40,10 +42,7 @@ class Collector:
     """
 
     def load_config(self, config_file_path):
-        """
-        Parses the yaml configuration file and stores the data into
-        member variables
-        """
+        """Parse the configuration file."""
         config_file = os.path.join(os.path.dirname(__file__),
                                    '../config/' + config_file_path)
         config = yaml.safe_load(open(config_file))
