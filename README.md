@@ -1,6 +1,11 @@
 # Slack Data Collector
 
-[![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=master)](https://travis-ci.org/mena-devs/slack_data_collector)
+| Branch | Build Status |
+| ------ | --- |
+| master | [![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=master)](https://travis-ci.org/mena-devs/slack_data_collector) |
+
+### Synopsis
+
 
 ### Synopsis
 
