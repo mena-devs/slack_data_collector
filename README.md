@@ -1,11 +1,6 @@
 # Slack Data Collector
 
-    version: alpha-0.0.1
-
-| Branch | Build Status |
-| ------ | --- |
-| master | [![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=master)](https://travis-ci.org/mena-devs/slack_data_collector) |
-| alpha-0.0.2 | [![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=alpha-0.0.2)](https://travis-ci.org/mena-devs/slack_data_collector) |
+[![Build Status](https://travis-ci.org/mena-devs/slack_data_collector.svg?branch=master)](https://travis-ci.org/mena-devs/slack_data_collector)
 
 ### Synopsis
 
@@ -18,9 +13,6 @@ Uses the Slack API to collect anonymized information about the community
   ```
   - Python 2.7 or 3.5
   - pip or pip3
-
-  # For testing
-  - nose
   ```
 
 1. Clone the repository into any directory you have access to:

@@ -1,15 +1,26 @@
 #!/usr/bin/python
 #
-# SlackDataCollector
-#
-# Script that uses the Slack python SDK
-# to authenticate to the MENA-Devs Slack Group
-# and collect relevant user information for the purpose
-# of data analysis
-#
-# @version: alpha-0.0.1
-# @author: Bassem Dghaidy
-"""The main Collector module."""
+# The MIT License (MIT)
+
+# Copyright (c) 2016 Mena-Devs
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 import yaml
 import os
@@ -29,8 +40,10 @@ class Collector:
     """
 
     def load_config(self, config_file_path):
-        """Parse the configuration file."""
-        # Load configuration file
+        """
+        Parses the yaml configuration file and stores the data into
+        member variables
+        """
         config_file = os.path.join(os.path.dirname(__file__),
                                    '../config/' + config_file_path)
         config = yaml.safe_load(open(config_file))
@@ -41,11 +54,8 @@ class Collector:
     def collect_data(self):
         """Query the Slack API and retrieve user data."""
         self.print_out('Information Retrieval Began ...')
-        # Attempt to retrieve the user list
-
         self.user_list = slack.users.list()
         self.print_out('Data Retrieved')
-        # Return the users list
         return self.user_list
 
     def write_data(self, data):
@@ -54,19 +64,13 @@ class Collector:
             self.print_out('No data was retrieved. Aborting now ...',
                            'FATAL')
             sys.exit(0)
-        # Setup the json file name
         date_time = self.get_today_date()
         file_name = '{}-{}.json'.format(self.data_file_prefix,
                                         date_time)
         output_file = os.path.join(self.data_dir, file_name)
-
-        # Info message
         self.print_out(
             'Attempting to write data to output file: {}'.format(output_file))
-        # Create the directory if it doesn't exist already
-
         self.make_dir(self.data_dir)
-        # Write data to file
         with io.open(output_file, 'w', encoding='utf-8') as f:
             f.write(json.dumps(self.user_list,
                                ensure_ascii=False,
