@@ -9,6 +9,7 @@
 #
 # @version: alpha-0.0.1
 # @author: Bassem Dghaidy
+"""The main Collector module."""
 
 import yaml
 import os
@@ -21,12 +22,14 @@ import slack.users
 
 
 class Collector:
+    """The main class of the script.
+
+    This class contains the methods for querying the API and
+    manipulating the data.
+    """
 
     def load_config(self, config_file_path):
-        """
-        Parses the yaml configuration file and stores the data into
-        member variables
-        """
+        """Parse the configuration file."""
         # Load configuration file
         config_file = os.path.join(os.path.dirname(__file__),
                                    '../config/' + config_file_path)
@@ -36,10 +39,7 @@ class Collector:
         slack.api_token = config['secure']['slack_group_token']
 
     def collect_data(self):
-        """
-        Main method - it taps into the Slack SDK to retrieve the user list
-        in json format then it passes this information to write_data()
-        """
+        """Query the Slack API and retrieve user data."""
         self.print_out('Information Retrieval Began ...')
         # Attempt to retrieve the user list
 
@@ -49,9 +49,7 @@ class Collector:
         return self.user_list
 
     def write_data(self, data):
-        """
-        Write data to the file specified in the configuration
-        """
+        """Write data to the file specified in the configuration."""
         if not data:
             self.print_out('No data was retrieved. Aborting now ...',
                            'FATAL')
@@ -77,9 +75,7 @@ class Collector:
             self.print_out('Job complete.')
 
     def anonymize_data(self, data):
-        """
-        Remove all personal and private data
-        """
+        """Remove all personal and private data."""
         for item in data['members']:
             item.pop('profile', None)
             item.pop('real_name', None)
@@ -88,23 +84,17 @@ class Collector:
         return data
 
     def get_today_date(self):
-        """
-        Returns a formatted date: day-month-year
-        """
+        """Return a formatted date: day-month-year."""
         today = datetime.datetime.now()
         return '{}-{}-{}'.format(today.day, today.month, today.year)
 
     def make_dir(self, directory):
-        """
-        Create directories if they do not already exist
-        """
+        """Create directories if they do not already exist."""
         if not os.path.exists(directory):
             os.makedirs(directory)
 
     def print_out(self, message, type='INFO'):
-        """
-        Custom output
-        """
+        """Log events to stdout."""
         print('{}::: {}'.format(type, message))
 
 
