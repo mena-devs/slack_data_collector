@@ -70,7 +70,7 @@ class Collector:
 
     def write_data(self, data):
         """Write data to the file specified in the configuration."""
-        date_time = self.get_today_date()
+        date_time = datetime.datetime.now().strftime('%d-%M-%Y')
         file_name = '{}-{}.json'.format(self.data_file_prefix,
                                         date_time)
         output_file = os.path.join(self.data_dir, file_name)
@@ -91,11 +91,6 @@ class Collector:
             item.pop('name', None)
 
         return data
-
-    def get_today_date(self):
-        """Return a formatted date: day-month-year."""
-        today = datetime.datetime.now()
-        return '{}-{}-{}'.format(today.day, today.month, today.year)
 
     def make_dir(self, directory):
         """Create directories if they do not already exist."""
