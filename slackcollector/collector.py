@@ -75,7 +75,11 @@ class Collector:
                                         date_time)
         output_file = os.path.join(self.data_dir, file_name)
         self.logger.info('Writing data to output file: {}'.format(output_file))
-        self.make_dir(self.data_dir)
+        try:
+            os.makedirs(self.data_dir)
+        except OSError:
+            # The directory exists already
+            pass
         with io.open(output_file, 'w', encoding='utf-8') as f:
             f.write(json.dumps(self.user_list,
                                ensure_ascii=False,
@@ -91,11 +95,6 @@ class Collector:
             item.pop('name', None)
 
         return data
-
-    def make_dir(self, directory):
-        """Create directories if they do not already exist."""
-        if not os.path.exists(directory):
-            os.makedirs(directory)
 
 
 if __name__ == "__main__":
