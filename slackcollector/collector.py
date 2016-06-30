@@ -42,6 +42,24 @@ class Collector:
     manipulating the data.
     """
 
+    def __init__(self, config_file=None):
+        """Load the config file and handle potential errors."""
+        self.configure_logging()
+        try:
+            self.load_config(config_file)
+        except IOError:
+            self.logger.error(
+                'Configuration file does not exist. Make sure'
+                ' the file "{}" exists and is '
+                'configured correctly.'.format(config_file))
+            sys.exit(1)
+        except yaml.scanner.ScannerError:
+            self.logger.error(
+                'Corrupted configuration file - could not be '
+                'parsed make sure "{}" is configured '
+                'correctly.'.format(config_file))
+            sys.exit(2)
+
     def configure_logging(self, level=logging.DEBUG):
         """Instanciate and configure a logger."""
         self.logger = logging.getLogger(__name__)
@@ -81,11 +99,18 @@ class Collector:
             # The directory exists already
             pass
         with io.open(output_file, 'w', encoding='utf-8') as f:
-            f.write(json.dumps(self.user_list,
-                               ensure_ascii=False,
-                               indent=4,
-                               separators=(',', ': ')))
-        self.logger.info('Writing complete')
+            try:
+                f.write(json.dumps(self.user_list,
+                                   ensure_ascii=False,
+                                   indent=4,
+                                   separators=(',', ': ')))
+                self.logger.info('Writing complete')
+            except IOError as e:
+                e = sys.exc_info()[0]
+                collector.logger.error(
+                    'Failed to write data.\n'
+                    'Error: {}'.format(e))
+                sys.exit(3)
 
     def anonymize_data(self, data):
         """Remove all personal and private data."""
@@ -98,28 +123,7 @@ class Collector:
 
 
 if __name__ == "__main__":
-    collector = Collector()
-    collector.configure_logging()
-    try:
-        collector.load_config('config.yml')
-    except IOError:
-        collector.logger.error('Configuration file does not exist. Make sure'
-                               ' the file "config/config.yml" exists and is '
-                               'configured correctly.')
-        sys.exit(1)
-    except yaml.scanner.ScannerError:
-        collector.logger.error('Corrupted configuration file - could not be '
-                               'parsed make sure "config.yml" is configured '
-                               'correctly.')
-        sys.exit(2)
+    collector = Collector('config.yml')
     data = collector.collect_data()
     data = collector.anonymize_data(data)
-    try:
-        collector.write_data(data)
-    except IOError as e:
-        e = sys.exc_info()[0]
-        collector.logger.error(
-            'Failed to write data.\n'
-            'Error: {}'.format(e),
-            'FATAL')
-        sys.exit(3)
+    collector.write_data(data)
