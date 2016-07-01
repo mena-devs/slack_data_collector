@@ -137,4 +137,4 @@ tox -e py33
 
 ### Contributing
 
-We would very much appreciate any and all contributions for this project. Nevertheless, in order for us to manage this repository efficiently, please review and abide the contribution guidelines detailed in this document: [CONTRIBUTING.md](https://github.com/mena-devs/slack_data_collector/blob/master/CONTRIBUTING.md) before pushing your changes.
+We would very much appreciate any and all contributions for this project. Nevertheless, in order for us to manage this repository efficiently, please review and abide by the contribution guidelines detailed in this document: [CONTRIBUTING.md](https://github.com/mena-devs/slack_data_collector/blob/master/CONTRIBUTING.md) before pushing your changes.
