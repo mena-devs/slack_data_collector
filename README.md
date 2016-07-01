@@ -134,3 +134,7 @@ tox -e py33
     "ok": true
 }
 ```
+
+### Contributing
+
+We would very much appreciate any and all contributions for this project. Nevertheless, in order for us to manage this repository efficiently, please review and abide by this document: ![CONTRIBUTING.md](https://github.com/mena-devs/slack_data_collector/blob/master/CONTRIBUTING.md) before pushing your changes.
