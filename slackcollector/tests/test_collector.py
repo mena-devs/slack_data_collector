@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import datetime
 import json
 import os
 import unittest
@@ -32,7 +31,7 @@ class TestCollector(unittest.TestCase):
 
     def setUp(self):
         self.config_file = 'config.example.yml'
-        self.collector_inst = Collector()
+        self.collector_inst = Collector(self.config_file)
 
     def test_load_config_file_success(self):
         self.collector_inst.load_config(self.config_file)
@@ -62,15 +61,6 @@ class TestCollector(unittest.TestCase):
             # If the intersection of the "sensitive_keys_set" and keys sets is
             # empty the we have cleared these keys and their values
             self.assertFalse(sensitive_keys_set.intersection(set(item.keys())))
-
-    def test_get_today_date(self):
-        """
-        Build the formatted date for today and test its equality
-        with what's returned from get_today_date()
-        """
-        today = datetime.datetime.now()
-        formatted_date = '{}-{}-{}'.format(today.day, today.month, today.year)
-        self.assertEquals(formatted_date, self.collector_inst.get_today_date())
 
 
 if __name__ == '__main__':
