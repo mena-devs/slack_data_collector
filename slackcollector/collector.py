@@ -24,15 +24,16 @@
 
 """The main Collector module."""
 
-import yaml
-import os
+import datetime
 import io
 import json
-import datetime
+import logging
+import os
 import sys
+
 import slack
 import slack.users
-import logging
+import yaml
 
 
 class Collector:
